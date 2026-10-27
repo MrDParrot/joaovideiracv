@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>João Videira | Cybersecurity Consultant</title>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#eef2ff',
+                            100: '#e0e7ff',
+                            200: '#c7d2fe',
+                            300: '#a5b4fc',
+                            400: '#818cf8',
+                            500: '#6366f1', // Indigo 500
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                            800: '#3730a3',
+                            900: '#312e81',
+                        },
+                        gray: {
+                            50: '#f8fafc',
+                            100: '#f1f5f9',
+                            200: '#e2e8f0',
+                            300: '#cbd5e1',
+                            400: '#94a3b8',
+                            500: '#64748b',
+                            600: '#475569',
+                            700: '#334155', // Slate tones for deep dark mode
+                            800: '#1e293b',
+                            900: '#0f172a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background: #475569;
+        }
+        
+        /* Hide scrollbar for carousel but keep functionality */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+        
+        /* Smooth transitions */
+        body {
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .card-hover {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-gray-300 antialiased selection:bg-primary-500 selection:text-white">
+
+    <!-- Navigation Bar -->
+    <nav class="fixed top-0 w-full z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 transition-colors">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <div class="flex-shrink-0 font-bold text-xl text-gray-900 dark:text-white tracking-tight">
+                    V<span class="text-primary-500">.</span>
+                </div>
+                
+                <!-- Links (Scrollable on mobile) -->
+                <div class="flex-1 flex justify-end md:justify-center overflow-x-auto no-scrollbar mx-4">
+                    <div class="flex items-center space-x-6 px-2">
+                        <a href="#about" class="text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 font-medium text-sm transition-colors whitespace-nowrap">About</a>
+                        <a href="#experience" class="text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 font-medium text-sm transition-colors whitespace-nowrap">Experience</a>
+                        <a href="#education" class="text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 font-medium text-sm transition-colors whitespace-nowrap">Education</a>
+                        <a href="#skills" class="text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 font-medium text-sm transition-colors whitespace-nowrap">Skills</a>
+                        <a href="#projects" class="text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 font-medium text-sm transition-colors whitespace-nowrap">Projects</a>
+                        <a href="#articles" class="text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 font-medium text-sm transition-colors whitespace-nowrap">Articles</a>
+                        <a href="#videos" class="text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 font-medium text-sm transition-colors whitespace-nowrap">Videos</a>
+                    </div>
+                </div>
+
+                <!-- Dark Mode Toggle Button -->
+                <div class="flex-shrink-0 ml-2">
+                    <button id="theme-toggle" class="p-2 rounded-full bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors focus:outline-none shadow-sm">
+                        <i id="theme-toggle-dark-icon" class="hidden fas fa-moon"></i>
+                        <i id="theme-toggle-light-icon" class="hidden fas fa-sun"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-12 flex flex-col lg:flex-row gap-8">
+        
+        <!-- LEFT SIDEBAR -->
+        <aside class="w-full lg:w-1/3 lg:shrink-0 flex flex-col gap-6">
+            
+            <!-- Profile Card -->
+            <div id="about" class="bg-white dark:bg-gray-800 rounded-3xl p-8 shadow-sm border border-gray-100 dark:border-gray-700 text-center relative overflow-hidden scroll-mt-28">
+                <!-- Decorative background blob -->
+                <div class="absolute top-0 left-0 w-full h-32 bg-gradient-to-br from-primary-500 to-primary-600 opacity-10 dark:opacity-20 rounded-t-3xl"></div>
+                
+                <!-- Profile Image points to corpo.png -->
+                <img src="corpo.png" alt="João Videira" class="w-40 h-40 rounded-full mx-auto object-cover border-4 border-white dark:border-gray-800 shadow-md relative z-10" onerror="this.src='https://placehold.co/400x400/6366f1/ffffff?text=JV'">
+                
+                <h1 class="text-3xl font-bold text-gray-900 dark:text-white mt-4">João Videira</h1>
+                <p class="text-primary-600 dark:text-primary-400 font-medium mt-1">Cybersecurity Consultant</p>
+                
+                <div class="mt-6 flex flex-col gap-3 text-sm text-left">
+                    <div class="flex items-center gap-3 text-gray-600 dark:text-gray-400">
+                        <i class="fas fa-map-marker-alt w-5 text-center"></i>
+                        <span>Torres Vedras</span>
+                    </div>
+                    <div class="flex items-center gap-3 text-gray-600 dark:text-gray-400">
+                        <i class="fas fa-envelope w-5 text-center"></i>
+                        <a href="mailto:jlmartinsvideira@gmail.com" class="hover:text-primary-500 transition-colors">jlmartinsvideira@gmail.com</a>
+                    </div>
+                </div>
+
+                <div class="mt-6 flex justify-center gap-4">
+                    <a href="https://www.linkedin.com/in/jo%C3%A3o-videira-374815222/" target="_blank" class="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center text-gray-600 dark:text-gray-300 hover:bg-primary-500 hover:text-white dark:hover:bg-primary-600 transition-colors">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="https://www.credly.com/users/joao-videira" target="_blank" class="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center text-gray-600 dark:text-gray-300 hover:bg-primary-500 hover:text-white dark:hover:bg-primary-600 transition-colors" title="Credly">
+                        <i class="fas fa-award"></i>
+                    </a>
+                </div>
+
+                <div class="mt-6">
+                    <a href="CV.pdf" download="CVJoaoVideira.pdf" class="w-full flex items-center justify-center gap-2 bg-primary-500 hover:bg-primary-600 text-white py-2.5 px-4 rounded-xl transition-colors font-medium shadow-sm">
+                        <i class="fas fa-download"></i>
+                        Download CV
+                    </a>
+                </div>
+            </div>
+
+            <!-- Skills Card -->
+            <div id="skills" class="bg-white dark:bg-gray-800 rounded-3xl p-8 shadow-sm border border-gray-100 dark:border-gray-700 scroll-mt-28">
+                <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4 border-b border-gray-100 dark:border-gray-700 pb-2">Skills</h2>
+                <div class="flex flex-wrap gap-2">
+                    <!-- Technical Skills -->
+                    <span class="px-3 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg text-sm">Linux</span>
+                    <span class="px-3 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg text-sm">Windows</span>
+                    <span class="px-3 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg text-sm">Azure</span>
+                    <span class="px-3 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg text-sm">Microsoft Sentinel</span>
+                    <span class="px-3 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg text-sm">KQL</span>
+                    <span class="px-3 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg text-sm">GitHub</span>
+                    <span class="px-3 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg text-sm">Azure DevOps</span>
+                    <span class="px-3 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg text-sm">Firewalls (Fortinet)</span>
+                    <span class="px-3 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg text-sm">Networking</span>
+                    <span class="px-3 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg text-sm">Virtual Machines</span>
+                    
+                    <!-- Cybersecurity Specific -->
+                    <span class="px-3 py-1 bg-primary-50 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 rounded-lg text-sm font-medium">SOC Analyst & Engineer</span>
+                    <span class="px-3 py-1 bg-primary-50 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 rounded-lg text-sm font-medium">ISO 27001</span>
+                    <span class="px-3 py-1 bg-primary-50 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 rounded-lg text-sm font-medium">Gap Analysis</span>
+                    <span class="px-3 py-1 bg-primary-50 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 rounded-lg text-sm font-medium">Risk Management</span>
+                    <span class="px-3 py-1 bg-primary-50 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 rounded-lg text-sm font-medium">CIS Benchmark</span>
+                    <span class="px-3 py-1 bg-primary-50 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 rounded-lg text-sm font-medium">SSDLC</span>
+                    <span class="px-3 py-1 bg-primary-50 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 rounded-lg text-sm font-medium">Nessus</span>
+                    <span class="px-3 py-1 bg-primary-50 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 rounded-lg text-sm font-medium">OWASP Top 10</span>
+                    <span class="px-3 py-1 bg-primary-50 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 rounded-lg text-sm font-medium">SAST / DAST / IAST / SCA</span>
+                    <span class="px-3 py-1 bg-primary-50 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 rounded-lg text-sm font-medium">Semgrep</span>
+                    <span class="px-3 py-1 bg-primary-50 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 rounded-lg text-sm font-medium">Black Duck</span>
+                    <span class="px-3 py-1 bg-primary-50 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 rounded-lg text-sm font-medium">SonarQube</span>
+                    <span class="px-3 py-1 bg-primary-50 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 rounded-lg text-sm font-medium">OWASP SAMM</span>
+                    
+                    <!-- Soft Skills & Other -->
+                    <span class="px-3 py-1 border border-gray-200 dark:border-gray-600 text-gray-600 dark:text-gray-400 rounded-lg text-sm">Soft Skills</span>
+                    <span class="px-3 py-1 border border-gray-200 dark:border-gray-600 text-gray-600 dark:text-gray-400 rounded-lg text-sm">Research</span>
+                    <span class="px-3 py-1 border border-gray-200 dark:border-gray-600 text-gray-600 dark:text-gray-400 rounded-lg text-sm">Article Writing</span>
+                    <span class="px-3 py-1 border border-gray-200 dark:border-gray-600 text-gray-600 dark:text-gray-400 rounded-lg text-sm">Demo Presentation</span>
+                </div>
+            </div>
+
+            <!-- Languages Card -->
+            <div class="bg-white dark:bg-gray-800 rounded-3xl p-8 shadow-sm border border-gray-100 dark:border-gray-700">
+                <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4 border-b border-gray-100 dark:border-gray-700 pb-2">Languages</h2>
+                <ul class="space-y-3">
+                    <li class="flex justify-between items-center">
+                        <span class="text-gray-700 dark:text-gray-300 font-medium">Portuguese</span>
+                        <span class="text-sm bg-primary-100 text-primary-700 dark:bg-primary-900/50 dark:text-primary-300 px-2 py-0.5 rounded">Native</span>
+                    </li>
+                    <li class="flex justify-between items-center">
+                        <span class="text-gray-700 dark:text-gray-300 font-medium">English</span>
+                        <span class="text-sm bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300 px-2 py-0.5 rounded">C2</span>
+                    </li>
+                    <li class="flex justify-between items-center">
+                        <span class="text-gray-700 dark:text-gray-300 font-medium">Spanish</span>
+                        <span class="text-sm bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300 px-2 py-0.5 rounded">B2</span>
+                    </li>
+                    <li class="flex justify-between items-center">
+                        <span class="text-gray-700 dark:text-gray-300 font-medium">German</span>
+                        <span class="text-sm bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300 px-2 py-0.5 rounded">A1</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Interests Card -->
+            <div class="bg-white dark:bg-gray-800 rounded-3xl p-8 shadow-sm border border-gray-100 dark:border-gray-700">
+                <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4 border-b border-gray-100 dark:border-gray-700 pb-2">Interests</h2>
+                <div class="flex flex-wrap gap-3">
+                    <div class="flex items-center gap-2 text-gray-700 dark:text-gray-300 bg-gray-50 dark:bg-gray-700/50 px-3 py-2 rounded-lg w-full">
+                        <i class="fas fa-shield-alt text-primary-500 w-5"></i> Cybersecurity
+                    </div>
+                    <div class="flex items-center gap-2 text-gray-700 dark:text-gray-300 bg-gray-50 dark:bg-gray-700/50 px-3 py-2 rounded-lg w-full">
+                        <i class="fas fa-music text-primary-500 w-5"></i> Piano
+                    </div>
+                    <div class="flex items-center gap-2 text-gray-700 dark:text-gray-300 bg-gray-50 dark:bg-gray-700/50 px-3 py-2 rounded-lg w-full">
+                        <i class="fas fa-language text-primary-500 w-5"></i> Learning Languages
+                    </div>
+                </div>
+            </div>
+
+        </aside>
+
+        <!-- RIGHT MAIN CONTENT -->
+        <main class="w-full lg:w-2/3 flex flex-col gap-6">
+            
+            <!-- About Section -->
+            <section class="bg-white dark:bg-gray-800 rounded-3xl p-8 shadow-sm border border-gray-100 dark:border-gray-700">
+                <div class="flex items-start gap-4 mb-4">
+                    <i class="fas fa-quote-left text-3xl text-primary-200 dark:text-primary-900/50"></i>
+                    <p class="text-xl font-medium text-gray-800 dark:text-gray-200 italic mt-2">
+                        "If I know, I will do, if I don't, I will learn."
+                    </p>
+                </div>
+                <p class="text-gray-600 dark:text-gray-400 leading-relaxed">
+                    Cybersecurity Consultant with hands-on experience across Application Security, GRC, and SOC operations. Specialized in AST tooling, from implementation and fine-tuning to CI/CD integration, with additional depth in ISO 27001 compliance, incident detection engineering, and vulnerability management. Comfortable leading client-facing engagements, training technical teams, and translating security findings into actionable outcomes.
+                </p>
+            </section>
+
+            <!-- Experience Section -->
+            <section id="experience" class="bg-white dark:bg-gray-800 rounded-3xl p-8 shadow-sm border border-gray-100 dark:border-gray-700 scroll-mt-28">
+                <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-lg bg-primary-100 dark:bg-primary-900/50 text-primary-600 dark:text-primary-400 flex items-center justify-center">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    Work Experience
+                </h2>
+                
+                <div class="relative pl-6 border-l-2 border-gray-200 dark:border-gray-700 space-y-10">
+                    
+                    <!-- Role 1: Balwurk -->
+                    <div class="relative">
+                        <!-- Timeline Dot -->
+                        <div class="absolute -left-[33px] top-1 w-4 h-4 rounded-full bg-primary-500 border-4 border-white dark:border-gray-800"></div>
+                        
+                        <div class="mb-1 flex flex-col sm:flex-row sm:items-center sm:justify-between">
+                            <h3 class="text-lg font-bold text-gray-900 dark:text-white">
+                                Cybersecurity Consultant 
+                                <span class="text-primary-600 dark:text-primary-400 font-medium">@ Balwurk</span>
+                            </h3>
+                            <span class="text-sm font-medium text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-900/20 px-3 py-1 rounded-full mt-2 sm:mt-0 w-fit">Nov 2023 - Sep 2026</span>
+                        </div>
+                        
+                        <div class="mt-4 space-y-4 text-gray-600 dark:text-gray-400 text-sm">
+                            <div>
+                                <strong class="text-gray-900 dark:text-gray-200 block mb-1">Software Development:</strong>
+                                Delivered custom Python-based enhancements to open-source security tools for client environments, including DefectDojo, extending functionality to match specific vulnerability-management workflows and client requirements.
+                            </div>
+                            <div>
+                                <strong class="text-gray-900 dark:text-gray-200 block mb-1">AST Tools:</strong>
+                                Company specialist for Application Security Testing tools, with deep focus on the Black Duck portfolio alongside Semgrep and SonarQube. Led demos, implementations, fine-tuned the tools to reduce false positives and integrated AST tooling into CI/CD pipelines as part of SSDLC initiatives.
+                            </div>
+                            <div>
+                                <strong class="text-gray-900 dark:text-gray-200 block mb-1">Training:</strong>
+                                Trained client development teams on vulnerability management platforms, AST tooling, and security best practices.
+                            </div>
+                            <div>
+                                <strong class="text-gray-900 dark:text-gray-200 block mb-1">GRC:</strong>
+                                Led ISO 27001 Gap Analysis and implementation engagements, working directly with clients to design and document the procedures and policies required for certification and ongoing compliance.
+                            </div>
+                            <div>
+                                <strong class="text-gray-900 dark:text-gray-200 block mb-1">SOC:</strong>
+                                Worked as both SOC Analyst and SOC Engineer: triaged security incidents, built and tuned detection rules in Microsoft Sentinel to catch new incidents and cut false positives, and built dashboards to speed up analyst triage.
+                            </div>
+                            <div>
+                                <strong class="text-gray-900 dark:text-gray-200 block mb-1">Vulnerability Management:</strong>
+                                Implemented vulnerability management policies and retested findings from pentests and scans, classifying them as false positives, active or mitigated.
+                            </div>
+                            <div>
+                                <strong class="text-gray-900 dark:text-gray-200 block mb-1">Maturity Assessment (Supporting):</strong>
+                                Supported an OWASP SAMM maturity assessment, contributing to the evaluation of client software security practices against the model's domains.
+                            </div>
+                            <div>
+                                <strong class="text-gray-900 dark:text-gray-200 block mb-1">Pentest (Supporting):</strong>
+                                Supported penetration tests during enumeration phases, identifying and flagging weak points for the lead pentesters to investigate further.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Role 2: Geopixel -->
+                    <div class="relative">
+                        <!-- Timeline Dot -->
+                        <div class="absolute -left-[33px] top-1 w-4 h-4 rounded-full bg-gray-300 dark:bg-gray-600 border-4 border-white dark:border-gray-800"></div>
+                        
+                        <div class="mb-1 flex flex-col sm:flex-row sm:items-center sm:justify-between">
+                            <h3 class="text-lg font-bold text-gray-900 dark:text-white">
+                                Computer Repair Specialist 
+                                <span class="text-gray-500 dark:text-gray-400 font-medium">@ Geopixel</span>
+                            </h3>
+                            <span class="text-sm font-medium text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-700 px-3 py-1 rounded-full mt-2 sm:mt-0 w-fit">Jun 2019 - Sep 2019</span>
+                        </div>
+                        
+                        <div class="mt-4 space-y-4 text-gray-600 dark:text-gray-400 text-sm">
+                            <p>
+                                Performed comprehensive maintenance and technical support for IT equipment. Responsibilities included systematic malware removal, thorough physical cleaning of hardware components, installation and configuration of operating systems and essential software suites, and customizing IT equipment to meet specific client requirements and optimize performance.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- Education Section -->
+            <section id="education" class="bg-white dark:bg-gray-800 rounded-3xl p-8 shadow-sm border border-gray-100 dark:border-gray-700 scroll-mt-28">
+                <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-lg bg-primary-100 dark:bg-primary-900/50 text-primary-600 dark:text-primary-400 flex items-center justify-center">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    Education
+                </h2>
+
+                <div class="space-y-6">
+                    <div class="flex flex-col md:flex-row md:items-start justify-between gap-2 border-b border-gray-100 dark:border-gray-700 pb-6 last:border-0 last:pb-0">
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-900 dark:text-white">Master in Cybersecurity</h3>
+                            <p class="text-gray-600 dark:text-gray-400 mt-1">Faculdade de Ciências da Universidade de Lisboa</p>
+                        </div>
+                        <span class="text-sm font-medium text-gray-500 dark:text-gray-400 whitespace-nowrap">Sep 2024 - Present</span>
+                    </div>
+
+                    <div class="flex flex-col md:flex-row md:items-start justify-between gap-2">
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-900 dark:text-white">Degree in Computer Engineering</h3>
+                            <p class="text-gray-600 dark:text-gray-400 mt-1">Instituto Politécnico de Castelo Branco</p>
+                        </div>
+                        <span class="text-sm font-medium text-gray-500 dark:text-gray-400 whitespace-nowrap">Sep 2020 - Sep 2023</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Certifications Section -->
+            <section class="bg-white dark:bg-gray-800 rounded-3xl p-8 shadow-sm border border-gray-100 dark:border-gray-700">
+                <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-lg bg-primary-100 dark:bg-primary-900/50 text-primary-600 dark:text-primary-400 flex items-center justify-center">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    Certificates
+                </h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="flex items-start gap-3 p-3 rounded-xl bg-gray-50 dark:bg-gray-700/30 border border-gray-100 dark:border-gray-700 card-hover">
+                        <i class="fas fa-shield-alt text-primary-500 mt-1"></i>
+                        <span class="text-gray-700 dark:text-gray-300 text-sm font-medium">CompTIA Security+</span>
+                    </div>
+                    <div class="flex items-start gap-3 p-3 rounded-xl bg-gray-50 dark:bg-gray-700/30 border border-gray-100 dark:border-gray-700 card-hover">
+                        <i class="fas fa-network-wired text-primary-500 mt-1"></i>
+                        <span class="text-gray-700 dark:text-gray-300 text-sm font-medium">CCNA: Introduction to Networks</span>
+                    </div>
+                    <div class="flex items-start gap-3 p-3 rounded-xl bg-gray-50 dark:bg-gray-700/30 border border-gray-100 dark:border-gray-700 card-hover">
+                        <i class="fas fa-route text-primary-500 mt-1"></i>
+                        <span class="text-gray-700 dark:text-gray-300 text-sm font-medium">CCNA: Switching, Routing, and Wireless Essentials</span>
+                    </div>
+                    <div class="flex items-start gap-3 p-3 rounded-xl bg-gray-50 dark:bg-gray-700/30 border border-gray-100 dark:border-gray-700 card-hover">
+                        <i class="fas fa-server text-primary-500 mt-1"></i>
+                        <span class="text-gray-700 dark:text-gray-300 text-sm font-medium">CCNA: Enterprise Networking, Security, and Automation</span>
+                    </div>
+                    <div class="flex items-start gap-3 p-3 rounded-xl bg-gray-50 dark:bg-gray-700/30 border border-gray-100 dark:border-gray-700 card-hover">
+                        <i class="fas fa-lock text-primary-500 mt-1"></i>
+                        <span class="text-gray-700 dark:text-gray-300 text-sm font-medium">Palo Alto Networks: Enterprise Security Management</span>
+                    </div>
+                    <div class="flex items-start gap-3 p-3 rounded-xl bg-gray-50 dark:bg-gray-700/30 border border-gray-100 dark:border-gray-700 card-hover">
+                        <i class="fas fa-check-circle text-primary-500 mt-1"></i>
+                        <span class="text-gray-700 dark:text-gray-300 text-sm font-medium">ISO/IEC 27001:2022 Lead Auditor <br><span class="text-xs text-gray-500 dark:text-gray-400 font-normal">(Mastermind)</span></span>
+                    </div>
+                    <div class="flex items-start gap-3 p-3 rounded-xl bg-gray-50 dark:bg-gray-700/30 border border-gray-100 dark:border-gray-700 card-hover">
+                        <i class="fas fa-users-cog text-primary-500 mt-1"></i>
+                        <span class="text-gray-700 dark:text-gray-300 text-sm font-medium">CSIRT in a Box: Initial Training for Incident Response Teams</span>
+                    </div>
+                    <div class="flex items-start gap-3 p-3 rounded-xl bg-gray-50 dark:bg-gray-700/30 border border-gray-100 dark:border-gray-700 card-hover">
+                        <i class="fas fa-clipboard-check text-primary-500 mt-1"></i>
+                        <span class="text-gray-700 dark:text-gray-300 text-sm font-medium">OWASP SAMM Fundamentals</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Projects Section -->
+            <section id="projects" class="bg-white dark:bg-gray-800 rounded-3xl p-8 shadow-sm border border-gray-100 dark:border-gray-700 scroll-mt-28">
+                <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-lg bg-primary-100 dark:bg-primary-900/50 text-primary-600 dark:text-primary-400 flex items-center justify-center">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    Projects & Languages
+                </h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Java -->
+                    <div class="p-5 rounded-2xl bg-gray-50 dark:bg-gray-700/20 border border-gray-100 dark:border-gray-700">
+                        <div class="flex items-center gap-2 mb-3">
+                            <i class="fab fa-java text-2xl text-[#f89820]"></i>
+                            <h3 class="font-bold text-gray-900 dark:text-white">Java</h3>
+                        </div>
+                        <p class="text-sm text-gray-600 dark:text-gray-400">Projects involving file manipulation, inheritance, polymorphism, and application of Patterns. Included the development of the application published in Informatica magazine.</p>
+                    </div>
+
+                    <!-- Python -->
+                    <div class="p-5 rounded-2xl bg-gray-50 dark:bg-gray-700/20 border border-gray-100 dark:border-gray-700">
+                        <div class="flex items-center gap-2 mb-3">
+                            <i class="fab fa-python text-2xl text-[#3776ab]"></i>
+                            <h3 class="font-bold text-gray-900 dark:text-white">Python</h3>
+                        </div>
+                        <p class="text-sm text-gray-600 dark:text-gray-400">Small projects involving file manipulation, as well as developments in Django web applications.</p>
+                    </div>
+
+                    <!-- Solidity -->
+                    <div class="p-5 rounded-2xl bg-gray-50 dark:bg-gray-700/20 border border-gray-100 dark:border-gray-700 md:col-span-2">
+                        <div class="flex items-center gap-2 mb-3">
+                            <i class="fab fa-ethereum text-2xl text-[#3c3c3d] dark:text-gray-300"></i>
+                            <h3 class="font-bold text-gray-900 dark:text-white">Solidity & Smart Contracts</h3>
+                        </div>
+                        <p class="text-sm text-gray-600 dark:text-gray-400">University project involving an ERC20-based DeFi lending protocol with ETH/DEX swaps and NFT/token-collateralized loans, deployed to Sepolia via Remix/MetaMask. Self-taught through CryptoZombies and Cyfrin's Solidity and security courses.</p>
+                    </div>
+
+                    <!-- Web Dev -->
+                    <div class="p-5 rounded-2xl bg-gray-50 dark:bg-gray-700/20 border border-gray-100 dark:border-gray-700">
+                        <div class="flex items-center gap-2 mb-3">
+                            <i class="fab fa-html5 text-2xl text-[#e34f26]"></i>
+                            <h3 class="font-bold text-gray-900 dark:text-white">HTML, CSS, PHP, JSP</h3>
+                        </div>
+                        <p class="text-sm text-gray-600 dark:text-gray-400">End-to-end creation and styling of a website for a restaurant.</p>
+                    </div>
+
+                    <!-- Assembly -->
+                    <div class="p-5 rounded-2xl bg-gray-50 dark:bg-gray-700/20 border border-gray-100 dark:border-gray-700">
+                        <div class="flex items-center gap-2 mb-3">
+                            <i class="fas fa-microchip text-2xl text-gray-700 dark:text-gray-400"></i>
+                            <h3 class="font-bold text-gray-900 dark:text-white">Assembly</h3>
+                        </div>
+                        <p class="text-sm text-gray-600 dark:text-gray-400">People counting program designed for a supermarket to monitor capacity and avoid crowds (developed during COVID-19).</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Articles Section -->
+            <section id="articles" class="bg-white dark:bg-gray-800 rounded-3xl p-8 shadow-sm border border-gray-100 dark:border-gray-700 scroll-mt-28">
+                <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-lg bg-primary-100 dark:bg-primary-900/50 text-primary-600 dark:text-primary-400 flex items-center justify-center">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    Published Articles
+                </h2>
+
+                <div class="space-y-4">
+
+                    <!-- Added Article (Industry 4.0) -->
+                    <div class="p-5 rounded-xl border border-gray-100 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-800/50 card-hover">
+                        <div class="flex flex-col md:flex-row md:items-start justify-between gap-2">
+                            <h3 class="font-bold text-gray-900 dark:text-white text-sm md:text-base">Challenges and Opportunities of Automated Vulnerability Assessment in Industry 4.0</h3>
+                            <span class="text-xs font-medium text-primary-600 dark:text-primary-400 whitespace-nowrap bg-primary-50 dark:bg-primary-900/20 px-2 py-1 rounded">Aug 2026</span>
+                        </div>
+                        
+                        <button class="toggle-article-btn mt-3 text-sm text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-medium focus:outline-none flex items-center gap-1 transition-colors">
+                            <span>See more</span> <i class="fas fa-chevron-down text-xs transition-transform duration-300"></i>
+                        </button>
+
+                        <div class="article-content hidden mt-4 space-y-3 border-t border-gray-200 dark:border-gray-700 pt-4">
+                            <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+                                Published in IEEE journal. This research explores the complex challenges of applying automated vulnerability assessment tools within Industry 4.0 environments, analyzing the gap between traditional IT security scanning and operational technology (OT) requirements.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- Article 1 -->
+                    <div class="p-5 rounded-xl border border-gray-100 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-800/50 card-hover border-l-4 border-l-primary-500">
+                        <div class="flex flex-col md:flex-row md:items-start justify-between gap-2">
+                            <h3 class="font-bold text-gray-900 dark:text-white text-sm md:text-base">Types of SQLi (kids these days need to rename everything!!1one)</h3>
+                            <span class="text-xs font-medium text-primary-600 dark:text-primary-400 whitespace-nowrap bg-primary-50 dark:bg-primary-900/20 px-2 py-1 rounded">Oct 2025</span>
+                        </div>
+                        
+                        <button class="toggle-article-btn mt-3 text-sm text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-medium focus:outline-none flex items-center gap-1 transition-colors">
+                            <span>See more</span> <i class="fas fa-chevron-down text-xs transition-transform duration-300"></i>
+                        </button>
+
+                        <div class="article-content hidden mt-4 space-y-3 border-t border-gray-200 dark:border-gray-700 pt-4">
+                            <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+                                This project is an article written for PagedOut! that explains various types of SQL injection attacks and how they work, providing a clear overview of their mechanisms and differences.
+                            </p>
+                            <div class="flex flex-wrap gap-2 pt-1">
+                                <span class="px-2 py-1 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded text-xs font-medium">Pesquisa</span>
+                                <span class="px-2 py-1 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded text-xs font-medium">OWASP</span>
+                                <span class="px-2 py-1 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded text-xs font-medium">+2 skills</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Article 2 -->
+                    <div class="p-5 rounded-xl border border-gray-100 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-800/50 card-hover">
+                        <div class="flex flex-col md:flex-row md:items-start justify-between gap-2">
+                            <h3 class="font-bold text-gray-900 dark:text-white text-sm md:text-base">A Mobile Application for Detecting and Monitoring the Development Stages of Wild Flowers and Plants</h3>
+                            <span class="text-xs font-medium text-primary-600 dark:text-primary-400 whitespace-nowrap bg-primary-50 dark:bg-primary-900/20 px-2 py-1 rounded">Feb 2024</span>
+                        </div>
+                        
+                        <button class="toggle-article-btn mt-3 text-sm text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-medium focus:outline-none flex items-center gap-1 transition-colors">
+                            <span>See more</span> <i class="fas fa-chevron-down text-xs transition-transform duration-300"></i>
+                        </button>
+
+                        <div class="article-content hidden mt-4 space-y-3 border-t border-gray-200 dark:border-gray-700 pt-4">
+                            <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+                                Wild flowers and plants appear spontaneously. They form the ecological basis on which life depends. They play a fundamental role in the regeneration of natural life and the balance of ecological systems. However, this irreplaceable natural heritage is at risk of being lost due to human activity and climate change. The work presented in this paper contributes to the conservation effort. It is based on a previous study by the same authors, which identified computer vision as a suitable technological platform for detecting and monitoring the development stages of wild flowers and plants. It describes the process of developing a mobile application that uses YOLOv4 and YOLOv4-tiny convolutional neural networks to detect the stages of development of wild flowers and plants. This application could be used by visitors in a nature park to provide information and raise awareness about the wild flowers and plants they find along the roads and trails.
+                            </p>
+                            <div class="flex flex-wrap gap-2 pt-1">
+                                <span class="px-2 py-1 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded text-xs font-medium">Pesquisa</span>
+                                <span class="px-2 py-1 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded text-xs font-medium">Inteligência artificial</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Article 3 -->
+                    <div class="p-5 rounded-xl border border-gray-100 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-800/50 card-hover">
+                        <div class="flex flex-col md:flex-row md:items-start justify-between gap-2">
+                            <h3 class="font-bold text-gray-900 dark:text-white text-sm md:text-base">Detecting and monitoring the development stages of wild flowers and plants using computer vision: approaches, challenges and opportunities</h3>
+                            <span class="text-xs font-medium text-primary-600 dark:text-primary-400 whitespace-nowrap bg-primary-50 dark:bg-primary-900/20 px-2 py-1 rounded">Oct 2023</span>
+                        </div>
+                        
+                        <button class="toggle-article-btn mt-3 text-sm text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-medium focus:outline-none flex items-center gap-1 transition-colors">
+                            <span>See more</span> <i class="fas fa-chevron-down text-xs transition-transform duration-300"></i>
+                        </button>
+
+                        <div class="article-content hidden mt-4 space-y-3 border-t border-gray-200 dark:border-gray-700 pt-4">
+                            <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+                                Wild flowers and plants play an important role in protecting biodiversity and providing various ecosystem services. However, some of them are endangered or threatened and are entitled to preservation and protection. This study represents a first step to develop a computer vision system and a supporting mobile app for detecting and monitoring the development stages of wild flowers and plants, aiming to contribute to their preservation. It first introduces the related concepts. Then, surveys related work and categorizes existing solutions presenting their key features, strengths, and limitations. The most promising solutions and techniques are identified. Insights on open issues and research directions in the topic are also provided. This paper paves the way to a wider adoption of recent results in computer vision techniques in this field and for the proposal of a mobile application that uses YOLO convolutional neural networks to detect the stages of development of wild flowers and plants.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- Videos Section -->
+            <section id="videos" class="bg-white dark:bg-gray-800 rounded-3xl p-8 shadow-sm border border-gray-100 dark:border-gray-700 scroll-mt-28">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-lg bg-primary-100 dark:bg-primary-900/50 text-primary-600 dark:text-primary-400 flex items-center justify-center">
+                            <i class="fas fa-video"></i>
+                        </div>
+                        Videos
+                    </h2>
+                    
+                    <!-- Navigation Arrows -->
+                    <div class="flex gap-2">
+                        <button id="prev-video" class="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center text-gray-600 dark:text-gray-300 hover:bg-primary-500 hover:text-white dark:hover:bg-primary-600 transition-all focus:outline-none shadow-sm" title="Previous Video">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button id="next-video" class="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center text-gray-600 dark:text-gray-300 hover:bg-primary-500 hover:text-white dark:hover:bg-primary-600 transition-all focus:outline-none shadow-sm" title="Next Video">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Carousel Container -->
+                <div class="relative w-full overflow-hidden">
+                    <div id="video-carousel" class="flex overflow-x-auto gap-6 pb-4 no-scrollbar scroll-smooth">
+                        
+                        <!-- Video 1 -->
+                        <div class="flex-none w-[280px] sm:w-[320px]">
+                            <div class="aspect-video bg-gray-900 rounded-xl overflow-hidden shadow-sm">
+                                <iframe referrerpolicy="strict-origin-when-cross-origin" width="100%" height="100%" src="https://www.youtube.com/embed/XhYvSZY6EOA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                            </div>
+                            <h3 class="mt-3 font-semibold text-gray-900 dark:text-white text-sm leading-tight">Porque é que detetar Vulnerabilidades no início do Desenvolvimento Aplicacional é mais eficiente?</h3>
+                        </div>
+
+                        <!-- Video 2 -->
+                        <div class="flex-none w-[280px] sm:w-[320px]">
+                            <div class="aspect-video bg-gray-900 rounded-xl overflow-hidden shadow-sm">
+                                <iframe referrerpolicy="strict-origin-when-cross-origin" width="100%" height="100%" src="https://www.youtube.com/embed/WT9AWvFTfYE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                            </div>
+                            <h3 class="mt-3 font-semibold text-gray-900 dark:text-white text-sm leading-tight">O que é uma ferramenta Análise Estática de Código (SAST)?</h3>
+                        </div>
+
+                        <!-- Video 3 -->
+                        <div class="flex-none w-[280px] sm:w-[320px]">
+                            <div class="aspect-video bg-gray-900 rounded-xl overflow-hidden shadow-sm">
+                                <iframe referrerpolicy="strict-origin-when-cross-origin"width="100%" height="100%" src="https://www.youtube.com/embed/fg-uM-4obiw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                            </div>
+                            <h3 class="mt-3 font-semibold text-gray-900 dark:text-white text-sm leading-tight">Como pode uma ferramenta de SCA proteger a minha organização contra ataques de Supply Chain?</h3>
+                        </div>
+
+                        <!-- Video 4 -->
+                        <div class="flex-none w-[280px] sm:w-[320px]">
+                            <div class="aspect-video bg-gray-900 rounded-xl overflow-hidden shadow-sm">
+                                <iframe referrerpolicy="strict-origin-when-cross-origin" width="100%" height="100%" src="https://www.youtube.com/embed/tRiKjODCSF8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                            </div>
+                            <h3 class="mt-3 font-semibold text-gray-900 dark:text-white text-sm leading-tight">Todas as aplicações da minha organização são internas. É necessário considerar medidas de segurança?</h3>
+                        </div>
+
+                        <!-- Video 5 -->
+                        <div class="flex-none w-[280px] sm:w-[320px]">
+                            <div class="aspect-video bg-gray-900 rounded-xl overflow-hidden shadow-sm">
+                                <iframe referrerpolicy="strict-origin-when-cross-origin" width="100%" height="100%" src="https://www.youtube.com/embed/CjeKAKfRvGY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                            </div>
+                            <h3 class="mt-3 font-semibold text-gray-900 dark:text-white text-sm leading-tight">O que se entende por superfície de ataque no contexto da segurança?</h3>
+                        </div>
+
+                        <!-- Video 6 -->
+                        <div class="flex-none w-[280px] sm:w-[320px]">
+                            <div class="aspect-video bg-gray-900 rounded-xl overflow-hidden shadow-sm">
+                                <iframe referrerpolicy="strict-origin-when-cross-origin" width="100%" height="100%" src="https://www.youtube.com/embed/WzPlckdoYbg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                            </div>
+                            <h3 class="mt-3 font-semibold text-gray-900 dark:text-white text-sm leading-tight">SAST Solutions - Coverity Static</h3>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center py-8 text-gray-500 dark:text-gray-400 text-sm">
+        <p>&copy; 2026 João Videira. All rights reserved.</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const darkIcon = document.getElementById('theme-toggle-dark-icon');
+        const lightIcon = document.getElementById('theme-toggle-light-icon');
+
+        // Check local storage or system preference (Default to dark for this theme)
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage))) {
+            document.documentElement.classList.add('dark');
+            lightIcon.classList.remove('hidden');
+        } else {
+            document.documentElement.classList.remove('dark');
+            darkIcon.classList.remove('hidden');
+        }
+
+        // Listen for toggle button click
+        themeToggleBtn.addEventListener('click', function() {
+            // Toggle icons
+            darkIcon.classList.toggle('hidden');
+            lightIcon.classList.toggle('hidden');
+
+            // If is set in localStorage
+            if (localStorage.getItem('color-theme')) {
+                if (localStorage.getItem('color-theme') === 'light') {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('color-theme', 'dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('color-theme', 'light');
+                }
+            } else {
+                // If NOT set in localStorage
+                if (document.documentElement.classList.contains('dark')) {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('color-theme', 'light');
+                } else {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('color-theme', 'dark');
+                }
+            }
+        });
+
+        // Video Carousel Logic
+        const carousel = document.getElementById('video-carousel');
+        const prevBtn = document.getElementById('prev-video');
+        const nextBtn = document.getElementById('next-video');
+
+        if (carousel && prevBtn && nextBtn) {
+            // Scroll amount = width of one card + gap space
+            const scrollAmount = 344; // 320px card + 24px (gap-6)
+
+            prevBtn.addEventListener('click', () => {
+                carousel.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+            });
+
+            nextBtn.addEventListener('click', () => {
+                carousel.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+            });
+        }
+
+        // Article Expand/Collapse Logic
+        const articleBtns = document.querySelectorAll('.toggle-article-btn');
+        articleBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const content = btn.nextElementSibling;
+                const text = btn.querySelector('span');
+                const icon = btn.querySelector('i');
+                
+                // Toggle the visibility of the content
+                content.classList.toggle('hidden');
+                
+                // Update text and icon rotation based on state
+                if (content.classList.contains('hidden')) {
+                    text.textContent = 'See more';
+                    icon.classList.remove('rotate-180');
+                } else {
+                    text.textContent = 'See less';
+                    icon.classList.add('rotate-180');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
